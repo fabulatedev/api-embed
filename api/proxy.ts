@@ -4,13 +4,13 @@ export const config = {
 
 export async function handler(req: Request) {
     const {
-        endpoint,
+        url,
         body,
         headers,
         method,
     } = await req.json();
 
-    return fetch(endpoint, {
+    return fetch(url, {
         method: method || 'POST',
         headers: headers || {},
         body: JSON.stringify(body),

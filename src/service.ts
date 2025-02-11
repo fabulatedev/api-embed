@@ -1,5 +1,5 @@
 export async function getMarkdown(
-    payload: { endpoint: string; body: any },
+    payload: any,
     onResp: (resp: string) => void
 ) {
     const resp = await fetch("/api/proxy", {
