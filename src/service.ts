@@ -1,16 +1,17 @@
-export async function getExplanationMarkdown(
-    codeFiles: { filename: string; code: string }[],
+export async function getMarkdown(
+    payload: { endpoint: string; body: any },
     onResp: (resp: string) => void
 ) {
-    onResp("*Loading...*");
-    onResp("```");
-    onResp("Loading explanation...");
-    onResp("```");
-    return;
-    const resp = await fetch("/api/explain", {
+    const resp = await fetch("/api/proxy", {
         method: "POST",
-        body: JSON.stringify(codeFiles),
+        body: JSON.stringify(payload),
     });
+
+    if (!(resp.body instanceof ReadableStream)) {
+        const data = await resp.text();
+        onResp(data);
+        return;
+    }
 
     const reader = resp.body.pipeThrough(new TextDecoderStream()).getReader();
     while (true) {
