@@ -3,7 +3,7 @@ import { getMarkdown } from "./service";
 import { useEffect, useState } from "react";
 import Markdown from "react-markdown";
 import rehypeRaw from 'rehype-raw';
-import { onMessage, sendMessage } from 'promise-postmessage';
+import { sendMessage } from 'promise-postmessage';
 
 export default function App() {
   const [markdown, setMarkdown] = useState("");
